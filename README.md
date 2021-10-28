@@ -35,11 +35,10 @@ Chrome插件没有严格的项目结构要求，只要保证本目录有一个ma
 
 - manifest.json 配置清单，必须
   - manifest_version、name、version3个是必不可少的，description和icons是推荐的。
-- background script 后台脚本
-- content script 内容脚本
-- options page 配置页
-- popup 弹窗
-- UI元素
+- background script 后台脚本: background.js
+- content script 内容脚本: contentScript.js
+- options page 配置页: options.html
+- UI元素: popup.html 弹窗
 - 其他逻辑代码
 
 ## Hello demo
@@ -103,6 +102,8 @@ service worker 注意事项：
 
 ## 用户界面
 
+![IMAGE](https://wd.imgix.net/image/BrQidfK9jaQyIHwdw91aVpkPiib2/8oLwFaq0VFIQtw4mcA91.png?auto=format&w=338)
+
 ```json
 {
   "name": "Getting Started Example",
@@ -151,4 +152,6 @@ MV3 是扩展插件推出十年来最大的变化之一，增强了安全性，�
 - step04 用户界面 popup.html
 - step05 修改页面颜色 popup.js
 - step06 插件配置页面 options.html,
-  - 工具栏右键，选项 
+  - 工具栏右键，选项
+
+![IMAGE](https://wd.imgix.net/image/BrQidfK9jaQyIHwdw91aVpkPiib2/CNDAVsTnJeSskIXVnSQV.png?auto=format&w=439)
