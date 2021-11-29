@@ -16,7 +16,9 @@ Chrome 插件是基于 web 技术（如html，css 和 JavaScript）构建的软�
 
 - [chrome 官方文档](https://developer.chrome.com/docs/extensions/)
 - [官方示例](https://github.com/GoogleChrome/chrome-extensions-samples)
+  - [~~mdn 实例~~](https://github.com/mdn/webextensions-examples)
 - [探索API功能](https://developer.chrome.com/docs/extensions/mv3/devguide/)
+- [API参考](https://developer.chrome.com/docs/extensions/reference/)
 
 在开发环境，可以通过插件开发者模式，加载未打包的插件代码。测试完成后，可以通过打包发布路程，发布到 Chrome 应用商店。
 
@@ -36,12 +38,15 @@ Chrome插件没有严格的项目结构要求，只要保证本目录有一个ma
 - manifest.json 配置清单，必须
   - manifest_version、name、version3个是必不可少的，description和icons是推荐的。
 - background script 后台脚本: background.js
-- content script 内容脚本: contentScript.js
+- content script 内容脚本，注入到网页内的代码
+  - 可以访问DOM，但是脚本执行环境是隔离的，不能和页面上的js交互，
+  - 可以使用`chrome.scripting.executeScript()`(需要`activeTab`权限) 或 在manifest中定义的方式来注入内容脚本
+  - 在 manifest 中设置 `web_accessible_resources`, 可以动态向网页中插入js代码
 - options page 配置页: options.html
 - UI元素: popup.html 弹窗
 - 其他逻辑代码
 
-## Hello demo
+## Hello World
 
 目录组成：
 
@@ -71,7 +76,7 @@ Chrome插件没有严格的项目结构要求，只要保证本目录有一个ma
 }
 ```
 
-## 注册后台脚本 background scripts
+## 后台脚本 background scripts
 
 ```json
 {
@@ -103,6 +108,7 @@ service worker 注意事项：
 ## 用户界面 popup
 
 ![IMAGE](https://wd.imgix.net/image/BrQidfK9jaQyIHwdw91aVpkPiib2/8oLwFaq0VFIQtw4mcA91.png?auto=format&w=338)
+
 
 ```json
 {
@@ -152,10 +158,39 @@ MV3 是扩展插件推出十年来最大的变化之一，增强了安全性，�
 - step04 用户界面 popup.html
 - step05 修改页面颜色 popup.js
 - step06 插件配置页面 options.html,
-  - 工具栏右键，选项
+  - 工具栏右键，选项 
+- step07 配置也没dialog
+- step08 omnibox search
+- 
+
 
 ![IMAGE](https://wd.imgix.net/image/BrQidfK9jaQyIHwdw91aVpkPiib2/CNDAVsTnJeSskIXVnSQV.png?auto=format&w=439)
 
 ## API 方法
 
 除非特别说明，`chrome.*`的API方法都是异步的，会立即返回，无需等待操作完成。
+
+## chrome.storage
+
+permissions: `storage`
+
+类似 localStorage API，但有一些不同：
+
+- 数据可以自动同步，在已经登陆的多个浏览器间同步 `storage.sync`
+- 扩展脚本可以直接访问数据，而无需后台页面
+- 拆封匿名行为时，也可以保留用户扩展设置
+- 大容量读写操作是异步的，所以更快
+- 数据可以存储为对象，localStorage 只能以字符串形式存储
+- 可以读取管理员为扩展配置的企业策略 `storage.managed`
+
+```js
+chrome.storage.sync.set({key: value}, function() {
+  console.log('Value is set to ' + value);
+});
+
+chrome.storage.sync.get(['key'], function(result) {
+  console.log('Value currently is ' + result.key);
+});
+
+```
+
