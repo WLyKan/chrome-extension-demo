@@ -71,7 +71,7 @@ Chrome插件没有严格的项目结构要求，只要保证本目录有一个ma
 }
 ```
 
-## 注册background scripts
+## 注册后台脚本 background scripts
 
 ```json
 {
@@ -100,7 +100,7 @@ service worker 注意事项：
   - 不支持`XMLHttpRequest`，使用` fetch() `
 - service worker 没有访问 DOM 的权限。
 
-## 用户界面
+## 用户界面 popup
 
 ![IMAGE](https://wd.imgix.net/image/BrQidfK9jaQyIHwdw91aVpkPiib2/8oLwFaq0VFIQtw4mcA91.png?auto=format&w=338)
 
@@ -155,3 +155,7 @@ MV3 是扩展插件推出十年来最大的变化之一，增强了安全性，�
   - 工具栏右键，选项
 
 ![IMAGE](https://wd.imgix.net/image/BrQidfK9jaQyIHwdw91aVpkPiib2/CNDAVsTnJeSskIXVnSQV.png?auto=format&w=439)
+
+## API 方法
+
+除非特别说明，`chrome.*`的API方法都是异步的，会立即返回，无需等待操作完成。
