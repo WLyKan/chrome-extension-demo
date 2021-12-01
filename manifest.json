@@ -4,25 +4,36 @@
   "version": "1.0",
   "description": "A hello world crx.",
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "/src/background.js"
   },
   "options_ui": {
-    "page": "options.html",
+    "page": "/src/options/index.html",
     "open_in_tab": false
   },
   "omnibox": { "keyword" : "mc" },
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": [
+    "storage", "activeTab", "scripting", "contextMenus"
+  ],
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "/src/popup/index.html",
     "default_icon": {
-      "16": "/images/icon16.png",
-      "48": "/images/icon48.png",
-      "128": "/images/icon128.png"
+      "16": "/src/images/icon16.png",
+      "48": "/src/images/icon48.png",
+      "128": "/src/images/icon128.png"
+    }
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Opens hello.html"
     }
   },
   "icons": {
-    "16": "/images/icon16.png",
-    "48": "/images/icon48.png",
-    "128": "/images/icon128.png"
+    "16": "/src/images/icon16.png",
+    "48": "/src/images/icon48.png",
+    "128": "/src/images/icon128.png"
   }
 }
