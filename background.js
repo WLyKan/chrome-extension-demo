@@ -12,3 +12,6 @@ chrome.omnibox.onInputEntered.addListener((text) => {
   var newURL = 'https://kaifa.baidu.com/searchPage?wd=' + encodeURIComponent(text);
   chrome.tabs.create({ url: newURL });
 });
+
+chrome.action.setBadgeText({text: 'ON'});
+chrome.action.setBadgeBackgroundColor({color: '#4688F1'});
