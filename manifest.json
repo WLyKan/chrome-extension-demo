@@ -12,7 +12,7 @@
   },
   "omnibox": { "keyword" : "mc" },
   "permissions": [
-    "storage", "activeTab", "scripting", "contextMenus"
+    "storage", "activeTab", "scripting", "contextMenus", "notifications"
   ],
   "action": {
     "default_popup": "/src/popup/index.html",

@@ -27,3 +27,16 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     chrome.tabs.create({url: 'https://kaifa.baidu.com/searchPage?wd=' + encodeURI(info.selectionText)});
   }
 })
+
+// 点击popup按钮弹出修改成功通知
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.color) {
+    chrome.notifications.create('', {
+      type: "basic",
+      iconUrl: "images/icon16.png",
+      title: "hello world",
+      message: "修改成功",
+    });
+  }
+  return true
+})

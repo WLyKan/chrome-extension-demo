@@ -2,6 +2,8 @@
 const changeColor = document.getElementById("changeColor");
 const switchBtn = document.getElementById("switch");
 
+const EXT_Id = 'cblpkaojhopjmbfmlhjpbchkilkbkpmf'
+
 chrome.storage.sync.get("color", ({ color }) => {
   changeColor.style.backgroundColor = color;
 });
@@ -13,6 +15,10 @@ changeColor.addEventListener("click", async () => {
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     function: setPageBackgroundColor,
+  });
+
+  chrome.runtime.sendMessage(EXT_Id, { color: changeColor.style.backgroundColor }, (res) => {
+    console.log('popup: message sent:', res);
   });
 });
 
