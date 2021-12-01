@@ -21,6 +21,7 @@ switchBtn.addEventListener("click", async () => {
   const status = await chrome.action.getBadgeText({ tabId: tab.id })
 
   chrome.action.setBadgeText({text: `${status === 'ON' ? 'OFF' : 'ON'}`});
+  chrome.action.setTitle({ title: '测试title' })
   chrome.action.setBadgeBackgroundColor({color: `${status === 'ON' ? '#e1e1e1' : '#4688F1'}`});
 })
 
